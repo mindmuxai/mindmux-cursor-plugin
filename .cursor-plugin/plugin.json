@@ -1,0 +1,19 @@
+{
+  "name": "mindmux",
+  "displayName": "MindMux Cloud Brain",
+  "version": "1.0.0",
+  "description": "Connect Cursor to MindMux Cloud Brain for persistent project context.",
+  "author": {
+    "name": "MindMux"
+  },
+  "homepage": "https://mindmux.ai",
+  "repository": "https://github.com/mindmuxai/mindmux-cursor-plugin",
+  "license": "Apache-2.0",
+  "keywords": [
+    "mindmux",
+    "cloud-brain",
+    "project-memory",
+    "mcp"
+  ],
+  "mcpServers": "./mcp.json"
+}
