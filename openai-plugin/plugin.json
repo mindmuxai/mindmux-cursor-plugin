@@ -1,0 +1,39 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "mindmux-cloud-brain",
+  "version": "1.0.0",
+  "description": "Connect ChatGPT and Codex to the Cloud Brains, Projects, and Workspaces available to a MindMux account.",
+  "author": {
+    "name": "MindMux",
+    "email": "hello@mindfly.dev",
+    "url": "https://mindmux.ai"
+  },
+  "homepage": "https://mindmux.ai/docs/getting-started/connect-cloud-brain-mcp",
+  "repository": "https://github.com/mindmuxai/mindmux-cursor-plugin",
+  "license": "Apache-2.0",
+  "keywords": ["mindmux", "cloud-brain", "project-memory", "mcp"],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "MindMux Cloud Brain",
+        "shortDescription": "Bring your project context to every conversation",
+        "longDescription": "Connect MindMux Cloud Brain to securely read and maintain the Cloud Brains, Projects, and Workspaces available to your MindMux account. MindMux only accesses content your connected account can access.",
+        "developerName": "MindMux",
+        "category": "Productivity",
+        "capabilities": ["List Workspaces and Projects", "Read Cloud Brains", "Maintain Brain Pages"],
+        "websiteURL": "https://mindmux.ai",
+        "supportURL": "https://mindmux.ai/docs/getting-started/connect-cloud-brain-mcp",
+        "privacyPolicyURL": "https://mindmux.ai/privacy",
+        "termsOfServiceURL": "https://mindmux.ai/terms",
+        "defaultPrompt": ["List my MindMux Workspaces and Projects.", "Help me find the relevant context in my MindMux Cloud Brain.", "Read my MindMux Brain guide before updating a Page."],
+        "brandColor": "#2312B7",
+        "brandColorDark": "#AFA5FF",
+        "composerIcon": "./assets/icon.png",
+        "composerIconDark": "./assets/icon-dark.png",
+        "logo": "./assets/logo.png",
+        "logoDark": "./assets/logo-dark.png"
+      },
+      "onboardingSkill": "./skills/get-started/SKILL.md"
+    }
+  }
+}

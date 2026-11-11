@@ -1,0 +1,21 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "mindmux": {
+      "type": "streamable-http",
+      "url": "https://mcp.mindmux.ai/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": { "mode": "dcr" },
+            "authorizationUrl": "https://mindmux.ai/api/mcp/oauth/authorize",
+            "tokenUrl": "https://mindmux.ai/api/mcp/oauth/token",
+            "registrationUrl": "https://mindmux.ai/api/mcp/oauth/register",
+            "baseScopes": ["mindmux:brain:read", "mindmux:brain:write"]
+          }
+        }
+      }
+    }
+  }
+}
