@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
+
+const root = fileURLToPath(new URL('../', import.meta.url));
+const cwd = join(root, 'packages/dsh');
+mkdirSync(join(root, 'dist'), { recursive: true });
+const [packed] = JSON.parse(execFileSync('npm', ['pack', '--ignore-scripts', '--json', '--pack-destination', join(root, 'dist')], { cwd, encoding: 'utf8' }));
+const paths = packed.files.map(file => file.path).sort();
+assert.deepEqual(paths, ['LICENSE', 'README.md', 'cordis.patch.yml', 'icon.png', 'index.js', 'locale/en.json', 'locale/zh.json', 'locales.js', 'package.json'].sort());
+const archive = join(root, 'dist', packed.filename);
+const manifest = JSON.parse(execFileSync('tar', ['-xOf', archive, 'package/package.json'], { encoding: 'utf8' }));
+assert.equal(manifest.name, '@mindmux/dsh-mindmux');
+assert.equal(manifest.dsh.bundle.patch, './cordis.patch.yml');
+assert.equal(manifest.dependencies, undefined);
+assert.equal(manifest.scripts.prepare, undefined);
+assert.equal(manifest.scripts.postinstall, undefined);
+assert.deepEqual(readFileSync(join(cwd, 'LICENSE')), readFileSync(join(root, 'LICENSE')));
+console.log(JSON.stringify({ archive, files: paths, integrity: packed.integrity }, null, 2));

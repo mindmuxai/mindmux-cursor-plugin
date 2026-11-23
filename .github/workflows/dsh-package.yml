@@ -1,0 +1,29 @@
+name: Verify DSH package
+on:
+  pull_request:
+    paths: ['packages/dsh/**', 'scripts/verify-dsh-package.mjs', '.github/workflows/dsh-package.yml']
+  push:
+    branches: [main]
+    paths: ['packages/dsh/**', 'scripts/verify-dsh-package.mjs', '.github/workflows/dsh-package.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.3'
+          cache: npm
+          cache-dependency-path: packages/dsh/package-lock.json
+      - run: npm ci --ignore-scripts
+        working-directory: packages/dsh
+      - run: npm test
+        working-directory: packages/dsh
+      - run: node scripts/verify-dsh-package.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mindmux-dsh-package
+          path: dist/*.tgz
