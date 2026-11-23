@@ -7,7 +7,7 @@ MindMux connector for DeepSeek Harness, using the shared MCP manager and OAuth a
 Install in the profile you actually run:
 
 ```sh
-dsh plugin --profile web add -w https://github.com/mindmuxai/mindmux-cursor-plugin/releases/download/dsh-v1.0.0/mindmux-dsh-mindmux-1.0.0.tgz
+dsh plugin --profile web add -w https://github.com/mindmuxai/mindmux-plugin/releases/download/dsh-v1.0.1/mindmux-dsh-mindmux-1.0.1.tgz
 ```
 
 Open Plugins → MindMux → Connect MindMux. Read packages/dsh/README.md for privacy, account requirements and sign-out instructions. This is a MindMux integration, not an official DeepSeek plugin. The release does not modify the existing Cursor or OpenAI plugin packages.
