@@ -1,5 +1,7 @@
 # MindMux Cloud Brain for Cursor
 
+Also available: [DeepSeek Harness connector](packages/dsh/README.md) · [DSH marketplace submission materials](DSH_SUBMISSION.md). Cursor configuration remains independent of the DSH package.
+
 Connect Cursor to [MindMux Cloud Brain](https://mindmux.ai) through the Model Context Protocol (MCP). MindMux gives your agents access to the Cloud Brains, Workspaces, and project context available to your MindMux account.
 
 ## Requirements

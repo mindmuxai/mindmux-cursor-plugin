@@ -1,0 +1,3 @@
+- insert:
+    - id: mindmux
+      name: '@mindmux/dsh-mindmux'
