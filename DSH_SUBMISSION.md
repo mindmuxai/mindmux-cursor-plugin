@@ -24,8 +24,8 @@ The implementation is independent MindMux code following these public extension 
 - User instructions, paid-service prerequisite, privacy, permissions, disconnect, support: [`packages/dsh/README.md`](packages/dsh/README.md).
 - English/Chinese display metadata: `packages/dsh/locale/`.
 - GitHub-hosted square PNG: `packages/dsh/icon.png` (same MindMux brand asset as the existing plugin).
-- Exact marketplace entry: [`submissions/dsh/mindmuxai__mindmux-cursor-plugin--packages-dsh.yml`](submissions/dsh/mindmuxai__mindmux-cursor-plugin--packages-dsh.yml).
-- Archive: `dist/mindmux-dsh-mindmux-1.0.0.tgz`, generated locally and by the Verify DSH package workflow; intentionally not committed as a binary.
+- Exact marketplace entry: [`submissions/dsh/mindmuxai__mindmux-plugin--packages-dsh.yml`](submissions/dsh/mindmuxai__mindmux-plugin--packages-dsh.yml).
+- Archive: `dist/mindmux-dsh-mindmux-1.0.1.tgz`, generated locally and by the Verify DSH package workflow; intentionally not committed as a binary.
 - No screenshots are declared: these are optional, and no connected-account screenshot is fabricated.
 
 ## Requirement checklist
@@ -34,14 +34,14 @@ The implementation is independent MindMux code following these public extension 
 | --- | --- |
 | Working implementation, not README-only or a dependency-only meta-package | `index.js` registers the production MCP server, context guidance and account surface. |
 | Installable bundle | `package.json` declares `dsh.bundle.patch`; patch inserts the package's exact name. |
-| Existing, maintained, public repository older than one day | `mindmuxai/mindmux-cursor-plugin`, created 2026-10-23; existing Cursor integration is retained. |
+| Existing, maintained, public repository older than one day | `mindmuxai/mindmux-plugin`, created 2026-10-23; existing Cursor integration is retained. |
 | `dsh-plugin` repository topic | Add using the command below; verify before submitting. |
 | Factual bilingual description and suitable category | Prepared YAML uses `memory`; no invented tool counts or unsupported offline/automatic-sync claims. |
 | Official dependencies and prerelease support | Official packages are peer dependencies; test-only versions are pinned under devDependencies. |
 | No install-time surprises or secrets | No prepare/postinstall scripts, external executables, token handling, local file ingestion or configurable destination for grants. |
 | Icon requirements | PNG on raw.githubusercontent.com; included within the package. |
 | Single-entry submission | Copy only the prepared YAML to the catalog's `data/plugins/`; do not edit generated READMEs. |
-| Stable, downloadable distribution | Publish the pinned `dsh-v1.0.0` release and archive **after this source PR is merged**, before the marketplace PR. |
+| Stable, downloadable distribution | Publish the pinned `dsh-v1.0.1` release and archive **after this source PR is merged**, before the marketplace PR. |
 
 ## Validation and limits
 
@@ -76,10 +76,10 @@ npm ci --ignore-scripts
 npm test
 cd ../..
 node scripts/verify-dsh-package.mjs
-gh repo edit mindmuxai/mindmux-cursor-plugin --add-topic dsh-plugin
-gh release create dsh-v1.0.0 dist/mindmux-dsh-mindmux-1.0.0.tgz \
-  --repo mindmuxai/mindmux-cursor-plugin --target "$(git rev-parse HEAD)" \
-  --title 'MindMux for DSH 1.0.0' --notes-file submissions/dsh/RELEASE_NOTES.md
+gh repo edit mindmuxai/mindmux-plugin --add-topic dsh-plugin
+gh release create dsh-v1.0.1 dist/mindmux-dsh-mindmux-1.0.1.tgz \
+  --repo mindmuxai/mindmux-plugin --target "$(git rev-parse HEAD)" \
+  --title 'MindMux for DSH 1.0.1' --notes-file submissions/dsh/RELEASE_NOTES.md
 ```
 
 No npm publish is necessary. Check that the release download and `main/packages/dsh/package.json` URLs return successfully before submitting. Never replace a published archive silently; bump version and release tag for changes.
@@ -88,13 +88,13 @@ Fork/clone [awesome-dsh-plugin](https://github.com/awesome-dsh-plugin/awesome-ds
 
 ```sh
 # From your marketplace checkout; replace the source path with your plugin checkout.
-cp /path/to/mindmux-cursor-plugin/submissions/dsh/mindmuxai__mindmux-cursor-plugin--packages-dsh.yml data/plugins/
-git add data/plugins/mindmuxai__mindmux-cursor-plugin--packages-dsh.yml
+cp /path/to/mindmux-plugin/submissions/dsh/mindmuxai__mindmux-plugin--packages-dsh.yml data/plugins/
+git add data/plugins/mindmuxai__mindmux-plugin--packages-dsh.yml
 git commit -m 'Add MindMux Cloud Brain plugin'
 git push -u origin HEAD
 gh pr create --repo awesome-dsh-plugin/awesome-dsh-plugin \
   --title 'Add MindMux Cloud Brain plugin' \
-  --body-file /path/to/mindmux-cursor-plugin/submissions/dsh/MARKETPLACE_PR.md
+  --body-file /path/to/mindmux-plugin/submissions/dsh/MARKETPLACE_PR.md
 ```
 
 Review the upstream contribution guide again at submission time. Follow its CI and human feedback; only change our own entry. The main source PR does **not** publish a release or submit to the external catalog automatically.

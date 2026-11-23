@@ -11,10 +11,10 @@ Connect [DeepSeek Harness (DSH)](https://github.com/deepseek-ai/deepseek-harness
 
 ## Install and connect
 
-Once the `dsh-v1.0.0` release is published:
+Install the `dsh-v1.0.1` release:
 
 ```sh
-dsh plugin --profile web add -w https://github.com/mindmuxai/mindmux-cursor-plugin/releases/download/dsh-v1.0.0/mindmux-dsh-mindmux-1.0.0.tgz
+dsh plugin --profile web add -w https://github.com/mindmuxai/mindmux-plugin/releases/download/dsh-v1.0.1/mindmux-dsh-mindmux-1.0.1.tgz
 dsh --profile web
 ```
 
@@ -33,7 +33,7 @@ cd packages/dsh
 npm ci --ignore-scripts
 npm test
 npm pack --pack-destination /tmp
-dsh plugin --profile web add -w /tmp/mindmux-dsh-mindmux-1.0.0.tgz
+dsh plugin --profile web add -w /tmp/mindmux-dsh-mindmux-1.0.1.tgz
 ```
 
 No build or install lifecycle script is required. Source installation from a monorepo Git URL is not required; use the prebuilt tarball.
@@ -46,7 +46,7 @@ Use **Sign out** on the plugin account page to remove the authorization saved by
 
 For a remotely hosted DSH instance, the callback origin may be non-loopback. MindMux rejects unapproved callbacks: the operator must verify the exact HTTPS callback and configure its allowlist; this plugin does not weaken that policy. Never share token stores or authorization URLs containing codes.
 
-See [Privacy](https://mindmux.ai/privacy), [Terms](https://mindmux.ai/terms), and the [MCP guide](https://mindmux.ai/docs/getting-started/connect-cloud-brain-mcp). Report plugin problems at [GitHub Issues](https://github.com/mindmuxai/mindmux-cursor-plugin/issues), including DSH version and profile, without credentials.
+See [Privacy](https://mindmux.ai/privacy), [Terms](https://mindmux.ai/terms), and the [MCP guide](https://mindmux.ai/docs/getting-started/connect-cloud-brain-mcp). Report plugin problems at [GitHub Issues](https://github.com/mindmuxai/mindmux-plugin/issues), including DSH version and profile, without credentials.
 
 ## 中文说明
 

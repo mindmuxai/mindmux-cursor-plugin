@@ -1,50 +1,68 @@
-# MindMux Cloud Brain for Cursor
+# MindMux Plugins
 
-Also available: [DeepSeek Harness connector](packages/dsh/README.md) · [DSH marketplace submission materials](DSH_SUBMISSION.md). Cursor configuration remains independent of the DSH package.
+Plugins and connectors that bring [MindMux Cloud Brain](https://mindmux.ai) to AI agents. This repository contains the platform-specific packages for Cursor, ChatGPT/Codex, and DeepSeek Harness (DSH).
 
-Connect Cursor to [MindMux Cloud Brain](https://mindmux.ai) through the Model Context Protocol (MCP). MindMux gives your agents access to the Cloud Brains, Workspaces, and project context available to your MindMux account.
+## Choose your platform
 
-## Requirements
+| Platform | Package | Setup and submission materials |
+| --- | --- | --- |
+| Cursor | [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json), [`mcp.json`](mcp.json) | [Cursor setup](#cursor) |
+| ChatGPT / Codex | [`openai-plugin/`](openai-plugin) | [OpenAI package and submission guide](OPENAI_SUBMISSION.md) |
+| DeepSeek Harness | [`packages/dsh/`](packages/dsh) | [DSH installation guide](packages/dsh/README.md), [marketplace submission materials](DSH_SUBMISSION.md) |
 
-- Cursor with plugin and remote MCP support.
-- A MindMux account with access to Cloud Brain MCP.
+Each package uses the same production MCP service, with its own host-specific manifest and packaging. No API key or separate local MCP server is required.
 
-## Install
+## Cloud Brain capabilities
 
-Install **MindMux Cloud Brain** from the Cursor Marketplace. Cursor adds the remote MCP server and opens the MindMux OAuth authorization flow when you connect it.
+With a MindMux account and access to an active Plus or Team Workspace, connected agents can:
 
-Sign in to MindMux and select **Authorize**. No API key or local server is required.
+- List accessible Workspaces, Projects, and Cloud Brains.
+- Search, read, create, and update Brain pages and root pages.
+- Create a Project and its attached Cloud Brain in a Workspace you explicitly select, subject to your permissions.
 
-## What it can do
+Agents must select the intended Workspace and Brain rather than infer a Brain from a repository or folder name. MindMux enforces account permissions, plan restrictions, and Brain format requirements on the server.
 
-After authorization, Cursor can use MindMux MCP to:
+## Connection and authorization
 
-- List the Workspaces and Cloud Brains you can access.
-- Read and update Cloud Brain pages and root pages.
-- Create a Project and its attached Cloud Brain in a Workspace you explicitly select.
-
-MindMux never infers a Cloud Brain from a repository or folder name. When a Brain is needed, Cursor asks you to select one.
-
-## Configuration
-
-The plugin connects to the following remote Streamable HTTP MCP server:
+All packages connect to the production Streamable HTTP endpoint:
 
 ```text
 https://mcp.mindmux.ai/mcp
 ```
 
-For manual setup and details about authorization, see the [MindMux MCP setup guide](https://mindmux.ai/docs/getting-started/connect-cloud-brain-mcp).
+Use your host's connection controls to sign in to MindMux and authorize access. Use those controls again to disconnect or clear saved authorization. See each platform's guide for version requirements and account controls, or the [MindMux MCP setup guide](https://mindmux.ai/docs/getting-started/connect-cloud-brain-mcp) for manual setup.
 
-## Disconnecting
+## Cursor
 
-Use Cursor's MCP connection controls to remove the server or clear its authentication. You can authorize it again later when needed.
+The repository root contains the Cursor plugin manifest, MCP configuration, and brand assets. Install **MindMux Cloud Brain** from the Cursor Marketplace and complete the MindMux OAuth flow when connecting.
+
+For local testing, copy this repository into `~/.cursor/plugins/local/mindmux`, restart Cursor (or run **Developer: Reload Window**), then open **Customize** and confirm the MindMux MCP server is available.
+
+## Build packages
+
+Build the OpenAI submission archive:
+
+```sh
+node scripts/build-openai-submission-zip.mjs
+node scripts/verify-openai-submission-package.mjs
+```
+
+Build the DSH tarball using the Node version required by its [installation guide](packages/dsh/README.md):
+
+```sh
+cd packages/dsh
+npm ci --ignore-scripts
+npm test
+cd ../..
+node scripts/verify-dsh-package.mjs
+```
+
+Generated packages are written to `dist/`. Follow the platform's submission guide for publishing and marketplace requirements.
 
 ## Privacy and support
 
-MindMux Cloud Brain is a hosted service. Review the [MindMux Privacy Policy](https://mindmux.ai/privacy) and [Terms of Service](https://mindmux.ai/terms) before connecting your account.
+MindMux Cloud Brain is a hosted service. Review the [Privacy Policy](https://mindmux.ai/privacy) and [Terms of Service](https://mindmux.ai/terms) before connecting.
 
-For product information and support, visit [mindmux.ai](https://mindmux.ai).
+For setup help, see the [MindMux documentation](https://mindmux.ai/docs/getting-started/connect-cloud-brain-mcp). Report plugin issues in [this repository](https://github.com/mindmuxai/mindmux-plugin/issues), without credentials or authorization tokens.
 
-## Development
-
-To test the plugin locally, copy this repository into `~/.cursor/plugins/local/mindmux`, restart Cursor (or run **Developer: Reload Window**), then open **Customize** and confirm the MindMux MCP server is available.
+Licensed under [Apache-2.0](LICENSE).
